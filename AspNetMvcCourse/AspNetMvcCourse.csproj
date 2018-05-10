@@ -152,6 +152,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805100628200_InitialCreate.cs" />
+    <Compile Include="Migrations\201805100628200_InitialCreate.Designer.cs">
+      <DependentUpon>201805100628200_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805101018528_Name.cs" />
+    <Compile Include="Migrations\201805101018528_Name.Designer.cs">
+      <DependentUpon>201805101018528_Name.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AspNetMvcDbContext.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -216,6 +225,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201805100628200_InitialCreate.resx">
+      <DependentUpon>201805100628200_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805101018528_Name.resx">
+      <DependentUpon>201805101018528_Name.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
