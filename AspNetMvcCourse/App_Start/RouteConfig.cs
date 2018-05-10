@@ -13,6 +13,9 @@ namespace AspNetMvcCourse
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // Use attribute routes
+            routes.MapMvcAttributeRoutes();
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
