@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AspNetMvcCourse.Models
 {
@@ -9,5 +10,6 @@ namespace AspNetMvcCourse.Models
         public string MatricNumber { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Name { get; set; }
+        public List<Payment> Payments { get; set; }
     }
 }

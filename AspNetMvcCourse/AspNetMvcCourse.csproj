@@ -160,8 +160,13 @@
     <Compile Include="Migrations\201805101018528_Name.Designer.cs">
       <DependentUpon>201805101018528_Name.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805101518329_AddPaymentsTable.cs" />
+    <Compile Include="Migrations\201805101518329_AddPaymentsTable.Designer.cs">
+      <DependentUpon>201805101518329_AddPaymentsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AspNetMvcDbContext.cs" />
+    <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -232,6 +237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805101018528_Name.resx">
       <DependentUpon>201805101018528_Name.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805101518329_AddPaymentsTable.resx">
+      <DependentUpon>201805101518329_AddPaymentsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
