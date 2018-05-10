@@ -8,5 +8,6 @@ namespace AspNetMvcCourse.Models
         public string IcNumber { get; set; }
         public string MatricNumber { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public string Name { get; set; }
     }
 }

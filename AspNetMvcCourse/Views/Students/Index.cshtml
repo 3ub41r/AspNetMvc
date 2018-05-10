@@ -9,6 +9,23 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+<div>
+    @using (Html.BeginForm("Index", "Students", FormMethod.Get))
+    {
+        <div class="form-group">
+            @Html.Label("MatricNumberList", "Matric Number")
+            @*<label for="MatricNumberList">Matric Number</label>*@
+            @Html.DropDownList("MatricNumberList", (SelectList) ViewBag.MatricNumberList, "All", new {@class = "form-control"})
+        </div>
+        <div class="form-group">
+            <label>Keyword</label>
+            @Html.TextBox("searchString", @Request.QueryString["searchString"], new { @class = "form-control" })
+        </div>
+
+        <button type="submit" class="btn btn-primary">Filter</button>
+    }
+</div>
 <table class="table">
     <tr>
         <th>

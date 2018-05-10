@@ -1,4 +1,5 @@
-﻿using AspNetMvcCourse.Models;
+﻿using System;
+using AspNetMvcCourse.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -11,9 +12,24 @@ namespace AspNetMvcCourse.Controllers
         private readonly AspNetMvcDbContext _db = new AspNetMvcDbContext();
 
         // GET: Students
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(_db.Students.ToList());
+            var students = from s in _db.Students
+                select s;
+
+            // Get distinct MatricNumber
+            var distinctMatricNumbers = (from s in _db.Students
+                orderby s.MatricNumber
+                select s.MatricNumber).Distinct().ToList();
+            
+            ViewBag.MatricNumberList = new SelectList(distinctMatricNumbers, distinctMatricNumbers.First());
+            
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                students = students.Where(s => s.IcNumber.Contains(searchString));
+            }
+
+            return View(students);
         }
 
         // GET: Students/Details/5
