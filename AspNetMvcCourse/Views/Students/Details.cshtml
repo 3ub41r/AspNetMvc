@@ -4,39 +4,34 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 class="my-3">@(Model.Name ?? "John Doe")</h2>
 
-<div>
-    <h4>Student</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.IcNumber)
-        </dt>
+<dl>
+    <dt>
+        IC Number
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.IcNumber)
+    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.IcNumber)
-        </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.MatricNumber)
+    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MatricNumber)
-        </dt>
+    <dd>
+        @Html.DisplayFor(model => model.MatricNumber)
+    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.MatricNumber)
-        </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.DateOfBirth)
+    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateOfBirth)
-        </dt>
+    <dd>
+        @Html.DisplayFor(model => model.DateOfBirth)
+    </dd>
+</dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.DateOfBirth)
-        </dd>
-
-    </dl>
+<div class="form-group">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-outline-secondary" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-link" })
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

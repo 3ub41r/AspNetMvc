@@ -14,22 +14,11 @@ namespace AspNetMvcCourse.Controllers
         // GET: Students
         public ActionResult Index(string searchString)
         {
-            var students = from s in _db.Students
-                select s;
-
-            // Get distinct MatricNumber
-            var distinctMatricNumbers = (from s in _db.Students
-                orderby s.MatricNumber
-                select s.MatricNumber).Distinct().ToList();
-            
-            ViewBag.MatricNumberList = new SelectList(distinctMatricNumbers, distinctMatricNumbers.First());
-            
-            if (!String.IsNullOrEmpty(searchString))
+            using (var db = new AspNetMvcDbContext())
             {
-                students = students.Where(s => s.IcNumber.Contains(searchString));
+                var students = db.Students;
+                return View(students.ToList());
             }
-
-            return View(students);
         }
 
         // GET: Students/Details/5
@@ -58,7 +47,7 @@ namespace AspNetMvcCourse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,IcNumber,MatricNumber,DateOfBirth")] Student student)
+        public ActionResult Create([Bind(Include = "Id,Name,IcNumber,MatricNumber,DateOfBirth")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +79,7 @@ namespace AspNetMvcCourse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,IcNumber,MatricNumber,DateOfBirth")] Student student)
+        public ActionResult Edit([Bind(Include = "Id,Name,IcNumber,MatricNumber,DateOfBirth")] Student student)
         {
             if (!ModelState.IsValid) return View(student);
 
