@@ -62,30 +62,34 @@ namespace AspNetMvcCourse.Controllers
         // GET: Students/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Student student = _db.Students.Find(id);
-            if (student == null)
-            {
-                return HttpNotFound();
-            }
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var student = _db.Students.Find(id);
+
+            if (student == null) return HttpNotFound();
+
             return View(student);
         }
 
         // POST: Students/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,IcNumber,MatricNumber,DateOfBirth")] Student student)
+        public ActionResult EditPost(int? id)
         {
-            if (!ModelState.IsValid) return View(student);
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            _db.Entry(student).State = EntityState.Modified;
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            using (var db = new AspNetMvcDbContext())
+            {
+                var student = db.Students.Find(id);
+
+                if (!TryUpdateModel(student, "", new[] {"MatricNumber", "Name", "IcNumber", "DateOfBirth"}))
+                    return View(student);
+
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
         }
 
         // GET: Students/Delete/5
@@ -108,10 +112,18 @@ namespace AspNetMvcCourse.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Student student = _db.Students.Find(id);
-            _db.Students.Remove(student);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            //var student = _db.Students.Find(id);
+            //_db.Students.Remove(student);
+
+            using (var db = new AspNetMvcDbContext())
+            {
+                // Reduce call to DB
+                var student = new Student { Id = id };
+                db.Entry(student).State = EntityState.Deleted;
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
         }
 
         protected override void Dispose(bool disposing)
