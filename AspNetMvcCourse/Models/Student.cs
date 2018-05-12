@@ -21,6 +21,7 @@ namespace AspNetMvcCourse.Models
 
         public string Name { get; set; }
 
+        // Virtual properties are lazy loaded
         public virtual ICollection<Payment> Payments { get; set; }
     }
 }
