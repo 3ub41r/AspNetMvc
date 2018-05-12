@@ -12,11 +12,16 @@ namespace AspNetMvcCourse.Controllers
         private readonly AspNetMvcDbContext _db = new AspNetMvcDbContext();
 
         // GET: Students
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string search)
         {
             using (var db = new AspNetMvcDbContext())
             {
-                var students = db.Students;
+                var students = from s in db.Students
+                               select s;
+
+                // Filter by the keyword 'search'
+                if (!string.IsNullOrEmpty(search)) students = students.Where(n => n.Name.Contains(search));
+
                 return View(students.ToList());
             }
         }

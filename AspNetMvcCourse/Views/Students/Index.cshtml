@@ -11,6 +11,22 @@
     @Html.ActionLink("New Student", "Create", null, new { @class = "btn btn-primary" })
 </div>
 
+<div class="row">
+    <div class="col-md-4 mb-3">
+        @using (Html.BeginForm("Index", "Students", FormMethod.Get))
+        {
+            <div class="form-group">
+                <div class="input-group">
+                    @Html.TextBox("search", Request.QueryString["search"], new { @class = "form-control" })
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">Search by Name</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
 <div class="table table-responsive">
     <table class="table table-striped table-hover">
         <thead>
