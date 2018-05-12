@@ -164,6 +164,10 @@
     <Compile Include="Migrations\201805101518329_AddPaymentsTable.Designer.cs">
       <DependentUpon>201805101518329_AddPaymentsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805120646513_StudentFK.cs" />
+    <Compile Include="Migrations\201805120646513_StudentFK.Designer.cs">
+      <DependentUpon>201805120646513_StudentFK.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AspNetMvcDbContext.cs" />
     <Compile Include="Models\Payment.cs" />
@@ -241,6 +245,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805101518329_AddPaymentsTable.resx">
       <DependentUpon>201805101518329_AddPaymentsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805120646513_StudentFK.resx">
+      <DependentUpon>201805120646513_StudentFK.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
