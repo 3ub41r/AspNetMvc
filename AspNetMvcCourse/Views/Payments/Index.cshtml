@@ -10,6 +10,7 @@
 
 <div class="form-group">
     @Html.ActionLink("New Payment", "Create", new { id = student.Id }, new { @class = "btn btn-outline-primary" })
+    @Html.ActionLink("Student Details", "Details", "Students", new { id = student.Id }, new { @class = "btn btn-link" })
 </div>
 
 @if (Model.Any())

@@ -33,7 +33,7 @@
 
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Add</button>
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-link" })
+        @Html.ActionLink("Back to List", "Index", new { id = student.Id }, new { @class = "btn btn-link" })
     </div>
 }
 
