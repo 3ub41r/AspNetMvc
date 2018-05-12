@@ -21,6 +21,6 @@ namespace AspNetMvcCourse.Models
 
         public string Name { get; set; }
 
-        public List<Payment> Payments { get; set; }
+        public virtual ICollection<Payment> Payments { get; set; }
     }
 }
