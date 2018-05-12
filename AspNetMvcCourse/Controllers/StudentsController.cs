@@ -88,7 +88,9 @@ namespace AspNetMvcCourse.Controllers
             using (var db = new AspNetMvcDbContext())
             {
                 var student = db.Students.Find(id);
-
+                
+                // Use TryUpdateModel to update fields from user input in the posted form data
+                // Bind resets fields
                 if (!TryUpdateModel(student, "", new[] {"MatricNumber", "Name", "IcNumber", "DateOfBirth"}))
                     return View(student);
 

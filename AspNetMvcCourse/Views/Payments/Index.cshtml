@@ -1,28 +1,38 @@
-﻿@model IEnumerable<AspNetMvcCourse.Models.Payment>
+﻿@using AspNetMvcCourse.Models
+@model IEnumerable<AspNetMvcCourse.Models.Payment>
 
 @{
     ViewBag.Title = "Students' Payments";
+    var student = (Student) ViewBag.Student;
 }
 
-<h2 class="my-3">Payments</h2>
+<h2 class="my-3">Payments for @Html.DisplayFor(s => student.Name)</h2>
+
+<div class="form-group">
+    @Html.ActionLink("New Payment", "Create", new { id = student.Id }, new { @class = "btn btn-outline-primary" })
+</div>
 
 @if (Model.Any())
 {
-    <table class="table">
-        <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.PaymentDate)</th>
-            <th>@Html.DisplayNameFor(model => model.Amount)</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var payment in Model)
-        {
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
             <tr>
-                <td>@Html.DisplayFor(item => payment.PaymentDate)</td>
-                <td>@Html.DisplayFor(item => payment.Amount)</td>
+                <th>@Html.DisplayNameFor(model => model.PaymentDate)</th>
+                <th>@Html.DisplayNameFor(model => model.Description)</th>
+                <th>@Html.DisplayNameFor(model => model.Amount)</th>
             </tr>
-        }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            @foreach (var payment in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(item => payment.PaymentDate)</td>
+                    <td>@Html.DisplayFor(item => payment.Description)</td>
+                    <td>@Html.DisplayFor(item => payment.Amount)</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
 }

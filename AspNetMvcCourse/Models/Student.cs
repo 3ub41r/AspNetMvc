@@ -15,7 +15,7 @@ namespace AspNetMvcCourse.Models
         [DisplayName("Matric Number")]
         public string MatricNumber { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [DisplayName("Date of Birth")]
         public DateTime DateOfBirth { get; set; }
 

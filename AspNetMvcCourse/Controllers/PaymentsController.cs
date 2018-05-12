@@ -13,17 +13,53 @@ namespace AspNetMvcCourse.Controllers
             // Get payments by students by id
             using (var c = ConnectionHelper.GetConnection())
             {
-                const string sql = @"SELECT * FROM Payments a 
-                JOIN Students b ON b.Id = a.StudentId 
+                const string studentSql = @"SELECT * FROM Students WHERE Id = @Id";
+
+                var student = c.QueryFirstOrDefault<Student>(studentSql, new { Id = id });
+
+                ViewBag.Student = student;
+
+                const string sql = @"
+                SELECT * FROM Payments
                 WHERE StudentId = @StudentId";
 
-                var payments = c.Query<Payment, Student, Payment>(sql, (payment, student) =>
-                    {
-                        payment.Student = student;
-                        return payment;
-                    }, new { StudentId = id });
+                var payments = c.Query<Payment>(sql, new { StudentId = student.Id });
 
                 return View(payments);
+            }
+        }
+
+        public ActionResult Create(int id)
+        {
+            using (var c = ConnectionHelper.GetConnection())
+            {
+                // This can be refactored to another class
+                const string sql = @"SELECT * FROM Students WHERE Id = @Id";
+
+                var student = c.QueryFirstOrDefault<Student>(sql, new { Id = id });
+
+                if (student == null) return HttpNotFound();
+
+                ViewBag.Student = student;
+                
+                return View();
+            }
+        }
+
+        [HttpPost, ActionName("Create")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreatePost([Bind(Include = "Description,PaymentDate,Amount,StudentId")] Payment payment)
+        {
+            if (!ModelState.IsValid) return View(payment);
+
+            using (var c = ConnectionHelper.GetConnection())
+            {
+                const string sql =@"
+                    INSERT INTO Payments (Description, PaymentDate, Amount, StudentId) 
+                    VALUES (@Description, @PaymentDate, @Amount, @StudentId)";
+                
+                c.Execute(sql, payment);
+                return RedirectToAction("Index", new { id = payment.StudentId });
             }
         }
     }
