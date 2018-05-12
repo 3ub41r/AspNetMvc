@@ -62,5 +62,22 @@ namespace AspNetMvcCourse.Controllers
                 return RedirectToAction("Index", new { id = payment.StudentId });
             }
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            using (var c = ConnectionHelper.GetConnection())
+            {
+                // Get payment
+                const string paymentSql = @"SELECT * FROM Payments WHERE Id = @Id";
+                var payment = c.QueryFirstOrDefault<Payment>(paymentSql, new { Id = id });
+                
+                const string sql = @"DELETE FROM Payments WHERE Id = @Id";
+                c.Execute(sql, new { Id = id });
+
+                return RedirectToAction("Index", new { id = payment.StudentId });
+            }
+        }
     }
 }

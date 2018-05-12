@@ -21,6 +21,7 @@
                 <th>@Html.DisplayNameFor(model => model.PaymentDate)</th>
                 <th>@Html.DisplayNameFor(model => model.Description)</th>
                 <th>@Html.DisplayNameFor(model => model.Amount)</th>
+                <th>&nbsp;</th>
             </tr>
             </thead>
             <tbody>
@@ -30,6 +31,13 @@
                     <td>@Html.DisplayFor(item => payment.PaymentDate)</td>
                     <td>@Html.DisplayFor(item => payment.Description)</td>
                     <td>@Html.DisplayFor(item => payment.Amount)</td>
+                    <td>
+                        @using (Html.BeginForm("Delete", "Payments", new { id = payment.Id }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</button>
+                        }
+                    </td>
                 </tr>
             }
             </tbody>
